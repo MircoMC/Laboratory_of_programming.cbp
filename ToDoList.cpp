@@ -7,29 +7,29 @@
 #include "memory"
 
 
-std::list<std::unique_ptr<ToDo>>::iterator TodoList::FindTask(const std::string &TitleTasktoFind) {
+ToDo * TodoList::FindTask(const std::string &TitleTasktoFind) {
     auto it = std::find_if(Tasks.begin(), Tasks.end(), [&TitleTasktoFind](const std::unique_ptr<ToDo> &task) {
         return task->getTitle() == TitleTasktoFind || task->getDescription() == TitleTasktoFind;
     });
 
     if (it != Tasks.end()) {
         std::cout << "Task trovato: " << it->get()->getTitle() << " - " << it->get()->getDescription() << std::endl;
-        return it;
-    } else {
-        throw std::runtime_error("Error: Task Not Found");
+        return it->get();
     }
-}
+        throw std::runtime_error("Error: Task Not Found");
+
+    }
 
 
 void TodoList::AddTask(const ToDo &TasktoAdd) {
     Tasks.push_back(std::make_unique<ToDo>(TasktoAdd));
-    std::cout << "ADD!" << std::endl;
+    //std::cout << "ADD!" << std::endl;
 }
 
 void TodoList::ModifyTask(const std::string &title, const std::string &newDescript, int newprio) {
     auto it = FindTask(title);
-    (*it)->SetNewDescription(newDescript);
-    (*it)->setPriority(newprio);
+    (*it).SetNewDescription(newDescript);
+    (*it).setPriority(newprio);
 
 }
 
@@ -49,9 +49,15 @@ void TodoList::RemoveTask(const std::string &TasktoRemove) {
 }
 
 void TodoList::MarkAsCompleted(const std::string &title) {
-    auto it = FindTask(title);
-    (*it)->MarkAsFinished();
-    Number_of_CompletedTasks++;
+    try {
+        auto it = FindTask(title);
+        (*it).MarkAsFinished();
+        Number_of_CompletedTasks++;
+    }
+
+    catch(std::runtime_error &c){
+        std::cout << c.what() << std::endl;
+    }
 }
 
 void TodoList::PrintAllTasks() {

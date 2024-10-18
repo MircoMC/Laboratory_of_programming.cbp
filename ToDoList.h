@@ -30,18 +30,20 @@ public:
         Tasks.clear();
     }
 
-    std::list<std::unique_ptr<ToDo>>::iterator FindTask(const std::string& TitleTasktoFind);
-
-private:
-    std::list<std::unique_ptr<ToDo>> Tasks;
-    std::string title_todo_list;
-    int Number_of_CompletedTasks{0};
+    ToDo * FindTask(const std::string& TitleTasktoFind);
 
     int getNumberOfTasks() const;
 
     int getNumberOfUnCompletedTasks() const;
 
     int getNumberOfCompletedTasks() const;
+
+private:
+    std::list<std::unique_ptr<ToDo>> Tasks;
+    std::string title_todo_list;
+    int Number_of_CompletedTasks{0};
+
+
 
 };
 
