@@ -22,17 +22,17 @@ public:
         }
     }
 
-    int getGiorno() const;
+    int getDay() const;
 
-    void setGiorno(int Ngiorno);
+    void setDay(int Ngiorno);
 
-    int getMese() const;
+    int getMonth() const;
 
-    void setMese(int mese);
+    void setMonth(int mese);
 
-    int getAnno() const;
+    int getYear() const;
 
-    void setAnno(int anno);
+    void setYear(int anno);
 
     bool IsLeap(int year) const;
 

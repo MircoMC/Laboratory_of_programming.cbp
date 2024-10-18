@@ -6,7 +6,7 @@
 #include "stdexcept"
 
 
-void Date::setGiorno(int Ngiorno) {
+void Date::setDay(int Ngiorno) {
     if (ValidDate(Ngiorno,this->Year,this->Month))
         Day = Ngiorno;
     else {
@@ -14,11 +14,11 @@ void Date::setGiorno(int Ngiorno) {
     }
 }
 
-int Date::getGiorno() const {
+int Date::getDay() const {
     return Day;
 }
 
-void Date::setMese(int mese) {
+void Date::setMonth(int mese) {
     if (ValidDate(this->Day,this->Year,mese)) {
             Month = mese;
     } else {
@@ -26,15 +26,15 @@ void Date::setMese(int mese) {
     }
 }
 
-int Date::getMese() const {
+int Date::getMonth() const {
     return Month;
 }
 
-int Date::getAnno() const {
+int Date::getYear() const {
     return Year;
 }
 
-void Date::setAnno(int anno) {
+void Date::setYear(int anno) {
     if (ValidDate(this->Day,anno,this->Month))
         Year = anno;
    else{
