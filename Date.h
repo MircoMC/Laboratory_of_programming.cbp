@@ -15,28 +15,28 @@ public:
             this->Day = d;
             this->Month = m;
             this->Year = y;
-            return;
         }
 
-        throw std::out_of_range("Unvalid Date!");
-
+        else{
+             throw std::out_of_range("Unvalid Date!");
+        }
     }
 
-    int getDay() const;
+    int getGiorno() const;
 
-    void setDay(int Ngiorno);
+    void setGiorno(int Ngiorno);
 
-    int getMonth() const;
+    int getMese() const;
 
-    void setMonth(int mese);
+    void setMese(int mese);
 
-    int getYear() const;
+    int getAnno() const;
 
-    void setYear(int anno);
+    void setAnno(int anno);
 
     bool IsLeap(int year) const;
 
-   std::string PrintDate() const;
+    std::string PrintDate() const;
 
     bool operator ==(const Date &data) const;
 

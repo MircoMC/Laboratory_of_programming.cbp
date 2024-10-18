@@ -6,7 +6,7 @@
 #include "stdexcept"
 
 
-void Date::setDay(int Ngiorno) {
+void Date::setGiorno(int Ngiorno) {
     if (ValidDate(Ngiorno,this->Year,this->Month))
         Day = Ngiorno;
     else {
@@ -14,11 +14,11 @@ void Date::setDay(int Ngiorno) {
     }
 }
 
-int Date::getDay() const {
+int Date::getGiorno() const {
     return Day;
 }
 
-void Date::setMonth(int mese) {
+void Date::setMese(int mese) {
     if (ValidDate(this->Day,this->Year,mese)) {
             Month = mese;
     } else {
@@ -26,15 +26,15 @@ void Date::setMonth(int mese) {
     }
 }
 
-int Date::getMonth() const {
+int Date::getMese() const {
     return Month;
 }
 
-int Date::getYear() const {
+int Date::getAnno() const {
     return Year;
 }
 
-void Date::setYear(int anno) {
+void Date::setAnno(int anno) {
     if (ValidDate(this->Day,anno,this->Month))
         Year = anno;
    else{
@@ -64,7 +64,7 @@ int Date::MaxDayOfMonth(int month, int year) const {
         case 2:
             return IsLeap(year) ? 29 : 28;
         default:
-            return 0;  //Unvalid Month
+            return 0;  // Mese non valido
     }
 }
 
@@ -111,13 +111,13 @@ bool Date::ValidDate(int day, int year, int month) const {
     return true;
 }
 
- std::string Date::PrintDate() const {
+std::string Date::PrintDate() const {
     return "Adding date->" + std::to_string(Day) + "/" + std::to_string(Month) + "/" + std::to_string(Year);
 
 }
 
 bool Date::operator==(const Date &data) const {
-    if(this->Day == data.Day && this->Year == data.Year && this->Month == data.Month) //
+    if(this->Day == data.Day && this->Year == data.Year && this->Month == Month)
         return true;
     return false;
 }
