@@ -16,6 +16,8 @@ public:
 
     void AddTask(const ToDo &TasktoAdd);
 
+    const std::string &getTitleTodoList() const;
+
     void RemoveTask(const std::string &TasktoRemove);
 
     void ModifyTask(const std::string &title, const std::string &newDescript, int newprio);
@@ -28,12 +30,6 @@ public:
         Tasks.clear();
     }
 
-    int getNumberOfTasks() const;
-
-    int getNumberOfUnCompletedTasks() const;
-
-    int getNumberOfCompletedTasks() const;
-
     std::list<std::unique_ptr<ToDo>>::iterator FindTask(const std::string& TitleTasktoFind);
 
 private:
@@ -41,6 +37,11 @@ private:
     std::string title_todo_list;
     int Number_of_CompletedTasks{0};
 
+    int getNumberOfTasks() const;
+
+    int getNumberOfUnCompletedTasks() const;
+
+    int getNumberOfCompletedTasks() const;
 
 };
 
