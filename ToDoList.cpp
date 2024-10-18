@@ -59,7 +59,16 @@ void TodoList::PrintAllTasks() {
         (*it).Print_details();
     }
     std::cout << "Number of Uncompleted Task: " << getNumberOfUnCompletedTasks() << std::endl;
+    std::cout << "Number of Completed Task: " << getNumberOfCompletedTasks() << std::endl;
     std::cout << "Number of Tasks: " << getNumberOfTasks() << std::endl;
+}
+
+const std::string &TodoList::getTitleTodoList() const {
+    return title_todo_list;
+}
+
+int TodoList::getNumberOfCompletedTasks() const {
+    return Number_of_CompletedTasks;
 }
 
 
