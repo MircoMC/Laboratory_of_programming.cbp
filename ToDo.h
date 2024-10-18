@@ -6,7 +6,6 @@
 #define LABORATORY_OF_PROGRAMMING_TODO_H
 
 #include "Date.h"
-#include "sstream"
 
 class ToDo {
 public:

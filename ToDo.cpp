@@ -35,7 +35,8 @@ bool ToDo::isFinished() const {
 
 void ToDo::MarkAsFinished() {
     Finished = true;
-    Print_details();
+    std::cout << "Update Status: " << "Completed" << std::endl;
+
 }
 
 void ToDo::SetNewDescription(const std::string &new_description) {
@@ -46,7 +47,7 @@ void ToDo::Print_details() const {
     std::cout << "Task title: " << getTitle() << std::endl;
     std::cout << "Description: " << getDescription() << std::endl;
     std::cout << "Priority level: " << getPriority() << std::endl;
-   std::cout << data.PrintDate() << std::endl;// Utilizza il metodo PrintDate della classe Date
+    std::cout << getData().PrintDate() << std::endl;// Utilizza il metodo PrintDate della classe Date
     // Stampa lo stato della task (completato o da fare)
     std::cout << "Status: " << (isFinished() ? "Completed" : "To Do") << std::endl;
 }
@@ -54,5 +55,7 @@ void ToDo::Print_details() const {
 const Date &ToDo::getData() const {
     return data;
 }
+
+
 
 

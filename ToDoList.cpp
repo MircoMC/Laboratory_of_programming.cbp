@@ -14,8 +14,7 @@ void TodoList::AddTask(const ToDo &TasktoAdd) {
 
 void TodoList::ModifyTask(const std::string &title, const std::string &newDescript, int newprio) {
     auto it = FindTask(title);
-    // Verifica che il task sia stato trovato
-    (*it)->SetNewDescription(newDescript); // Dereferenzia l'iteratore
+    (*it)->SetNewDescription(newDescript);
     (*it)->setPriority(newprio);
 
 }
@@ -29,15 +28,11 @@ int TodoList::getNumberOfUnCompletedTasks() const {
 }
 
 void TodoList::RemoveTask(const std::string &TasktoRemove) {
-    try {
-        auto it = FindTask(TasktoRemove);
-        Tasks.erase(it);  // Elimina il task usando l'iteratore
-    }
-    catch (const std::runtime_error &e) {
-        std::cerr << e.what() << std::endl;
-    }
-}
+    Tasks.remove_if([&](const std::unique_ptr<ToDo>& task) {
+        return task->getTitle() == TasktoRemove || task->getDescription() == TasktoRemove;
+    });
 
+}
 void TodoList::MarkAsCompleted(const std::string &title) {
     auto it = FindTask(title);
     (*it)->MarkAsFinished();
@@ -50,7 +45,6 @@ void TodoList::PrintAllTasks()  {
     }
     std::cout << "Number of Uncompleted Task: " << getNumberOfUnCompletedTasks() << std::endl;
     std::cout << "Number of Tasks: " << getNumberOfTasks() << std::endl;
-
 }
 
 std::list<std::unique_ptr<ToDo>>::iterator TodoList::FindTask(const std::string &TitleTasktoFind) {
@@ -59,12 +53,11 @@ std::list<std::unique_ptr<ToDo>>::iterator TodoList::FindTask(const std::string 
     });
 
     if (it != Tasks.end()) {
+        std::cout << "Task trovato: " << it->get()->getTitle() << " - " << it->get()->getDescription() << std::endl;
         return it;
     } else {
         throw std::runtime_error("Error: Task Not Found");
     }
 }
 
-int TodoList::getNumberOfCompletedTasks() const {
-    return Number_of_CompletedTasks;
-}
+

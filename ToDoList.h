@@ -28,18 +28,20 @@ public:
         Tasks.clear();
     }
 
-    int getNumberOfTasks() const;
 
-    int getNumberOfUnCompletedTasks() const;
 
-    int getNumberOfCompletedTasks() const;
+std::list<std::unique_ptr<ToDo>>::iterator FindTask(const std::string& TitleTasktoFind); //made public
 
 private:
     std::list<std::unique_ptr<ToDo>> Tasks;
     std::string title_todo_list;
     int Number_of_CompletedTasks{0};
-    std::list<std::unique_ptr<ToDo>>::iterator FindTask(const std::string& TitleTasktoFind);
 
+    int getNumberOfUnCompletedTasks() const; // made private
+
+    int getNumberOfCompletedTasks() const; //made private
+
+    int getNumberOfTasks() const; //made private
 };
 
 #endif //LABORATORY_OF_PROGRAMMING_TODOLIST_H
