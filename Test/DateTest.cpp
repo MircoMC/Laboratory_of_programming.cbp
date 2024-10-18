@@ -6,28 +6,28 @@
 
 TEST(DataTest, ConstructorTest) {
     Date data(15, 11, 2003);
-    EXPECT_EQ(data.getGiorno(), 15);
-    EXPECT_EQ(data.getMese(), 11);
-    EXPECT_EQ(data.getAnno(), 2003);
+    EXPECT_EQ(data.getDay(), 15);
+    EXPECT_EQ(data.getMonth(), 11);
+    EXPECT_EQ(data.getYear(), 2003);
 }
 
 TEST(DataTest, SettersTest) {
     Date data(11, 11, 2000);
-    data.setMese(12);
-    data.setGiorno(30);
+    data.setMonth(12);
+    data.setDay(30);
     ASSERT_EQ(data, Date(30, 12, 2000));
-    EXPECT_THROW(data.setMese(2), std::out_of_range);
-    EXPECT_THROW(data.setAnno(15), std::out_of_range);
-    EXPECT_THROW(data.setMese(13), std::out_of_range);
-    EXPECT_THROW(data.setGiorno(2000), std::out_of_range);
+    EXPECT_THROW(data.setMonth(2), std::out_of_range);
+    EXPECT_THROW(data.setYear(15), std::out_of_range);
+    EXPECT_THROW(data.setMonth(13), std::out_of_range);
+    EXPECT_THROW(data.setDay(2000), std::out_of_range);
 
 }
 
 TEST(DataTest, IsleapTest) {
     Date data(11, 9, 2001);
-    EXPECT_FALSE(data.IsLeap(data.getAnno()));
-    data.setAnno(2000);
-    EXPECT_TRUE(data.IsLeap(data.getAnno()));
+    EXPECT_FALSE(data.IsLeap(data.getYear()));
+    data.setYear(2000);
+    EXPECT_TRUE(data.IsLeap(data.getYear()));
 
 }
 
@@ -36,7 +36,7 @@ TEST(DataTest, EqualityDateTest) {
     Date date2(2, 2, 2003);
 
     ASSERT_FALSE(date1 == date2);
-    date2.setGiorno(11);
+    date2.setDay(11);
     ASSERT_TRUE(date1 == date2);
 }
 
