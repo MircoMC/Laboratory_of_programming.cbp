@@ -34,11 +34,13 @@ public:
 
     int getNumberOfCompletedTasks() const;
 
+    std::list<std::unique_ptr<ToDo>>::iterator FindTask(const std::string& TitleTasktoFind);
+
 private:
     std::list<std::unique_ptr<ToDo>> Tasks;
     std::string title_todo_list;
     int Number_of_CompletedTasks{0};
-    std::list<std::unique_ptr<ToDo>>::iterator FindTask(const std::string& TitleTasktoFind);
+
 
 };
 
