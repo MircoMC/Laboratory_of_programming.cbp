@@ -7,20 +7,6 @@
 #include "memory"
 
 
-ToDo * TodoList::FindTask(const std::string &TitleTasktoFind) {
-    auto it = std::find_if(Tasks.begin(), Tasks.end(), [&TitleTasktoFind](const std::unique_ptr<ToDo> &task) {
-        return task->getTitle() == TitleTasktoFind || task->getDescription() == TitleTasktoFind;
-    });
-
-    if (it != Tasks.end()) {
-        std::cout << "Task trovato: " << it->get()->getTitle() << " - " << it->get()->getDescription() << std::endl;
-        return it->get();
-    }
-        throw std::runtime_error("Error: Task Not Found");
-
-    }
-
-
 void TodoList::AddTask(const ToDo &TasktoAdd) {
     Tasks.push_back(std::make_unique<ToDo>(TasktoAdd));
     //std::cout << "ADD!" << std::endl;
@@ -28,9 +14,19 @@ void TodoList::AddTask(const ToDo &TasktoAdd) {
 
 void TodoList::ModifyTask(const std::string &title, const std::string &newDescript, int newprio) {
     auto it = FindTask(title);
-    (*it).SetNewDescription(newDescript);
-    (*it).setPriority(newprio);
+    {
+        auto tasks = FindTask(title);
+        if (!tasks.empty()) {
+            auto &task = tasks.front();
+            task->setPriority(newprio);
+            task->setDescription(newDescript);
+            std::cout << "Task modificato: " << task->getTitle() << " - " << task->getDescription() << " - Priorità: "
+                      << task->getPriority() << std::endl;
+        } else {
+            std::cerr << "Errore: Task non trovato" << std::endl;
+        }
 
+    }
 }
 
 int TodoList::getNumberOfTasks() const {
@@ -49,15 +45,17 @@ void TodoList::RemoveTask(const std::string &TasktoRemove) {
 }
 
 void TodoList::MarkAsCompleted(const std::string &title) {
-    try {
-        auto it = FindTask(title);
-        (*it).MarkAsFinished();
-        Number_of_CompletedTasks++;
+    auto tasks = FindTask(title);
+    for(auto it = tasks.begin();it != tasks.end();it++) {
+        if (!tasks.empty()) {
+            it->get()->MarkAsFinished();
+            std::cout << "Task completato: " << it->get()->getTitle() << " - " << it->get()->getDescription() << std::endl;
+        }
+        else{
+            std::cerr << "Errore: Task/s non trovato/e" << std::endl;
+        }
     }
 
-    catch(std::runtime_error &c){
-        std::cout << c.what() << std::endl;
-    }
 }
 
 void TodoList::PrintAllTasks() {
@@ -77,6 +75,13 @@ int TodoList::getNumberOfCompletedTasks() const {
     return Number_of_CompletedTasks;
 }
 
-
-
-
+std::list<std::unique_ptr<ToDo>> TodoList::FindTask(const std::string &TitleTasktoFind) {
+    std::list<std::unique_ptr<ToDo>> result;
+    for (auto it = Tasks.begin(); it != Tasks.end();it++) {
+        if ((*it)->getTitle() == TitleTasktoFind || (*it)->getDescription() == TitleTasktoFind) {
+            std::cout << "Task trovato: " << (*it)->getTitle() << " - " << (*it)->getDescription() << std::endl;
+            result.push_back(std::move(*it));
+        }
+    }
+    return result;
+}
