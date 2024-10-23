@@ -13,7 +13,7 @@ public:
     ToDo(const std::string &title, const std::string &description, int priority, const Date &date)
             : Title(title), Description(description), Priority(priority), Finished(false), data(date) {}
 
-    void SetDate(const Date& date);
+    void setDate(const Date& date);
 
     const Date &getData() const;
 
@@ -23,7 +23,7 @@ public:
 
     const std::string &getTitle() const;
 
-    void SetNewDescription(const std::string &new_description);
+    void setDescription(const std::string &description);
 
     void setTitle(const std::string &title);
 

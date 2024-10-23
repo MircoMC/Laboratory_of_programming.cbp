@@ -40,7 +40,6 @@ public:
 
     bool operator ==(const Date &data) const;
 
-    bool ValidDate(int day, int year, int month) const;
 
 private:
     int Day;
@@ -54,6 +53,8 @@ private:
     bool ValidDay(int day, int year, int month) const;
 
     int getDaysOfMonth(int month, int year) const;
+
+    bool ValidDate(int day, int year, int month) const;
 
     int MaxDayOfMonth(int month, int year) const;
 };

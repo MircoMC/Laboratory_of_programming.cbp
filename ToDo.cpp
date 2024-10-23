@@ -8,7 +8,7 @@
 const std::string &ToDo::getDescription() const {
     return Description;
 }
-void ToDo::SetDate(const Date& date){
+void ToDo::setDate(const Date& date){
     ToDo::data=date;
 }
 int ToDo::getPriority() const {
@@ -35,11 +35,11 @@ bool ToDo::isFinished() const {
 
 void ToDo::MarkAsFinished() {
     Finished = true;
-    Print_details();
+    //Print_details();
 }
 
-void ToDo::SetNewDescription(const std::string &new_description) {
-    Description = new_description;
+void ToDo::setDescription(const std::string &description)  {
+    Description = description;
 }
 
 void ToDo::Print_details() const {
