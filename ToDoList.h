@@ -30,13 +30,16 @@ public:
         Tasks.clear();
     }
 
-    std::list<std::unique_ptr<ToDo>> FindTask(const std::string& TitleTasktoFind); //
+    std::list<ToDo*> FindTask(const std::string& TitleTasktoFind); //
 
     int getNumberOfTasks() const;
 
     int getNumberOfUnCompletedTasks() const;
 
     int getNumberOfCompletedTasks() const;
+
+
+    const std::list<std::unique_ptr<ToDo>> &getTasks() const;
 
 private:
     std::list<std::unique_ptr<ToDo>> Tasks;
