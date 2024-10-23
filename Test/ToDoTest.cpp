@@ -30,6 +30,6 @@ TEST(ToDoTest,MarkAsFinished){
     ToDo td2("Task 2","Completare una Task",3,Date(4,5,2012));
     td.MarkAsFinished();
     EXPECT_TRUE(td.isFinished());
-    EXPECT_FALSE(td2.isFinished());
+    EXPECT_FALSE(td2.isFinished());//
 
 }
