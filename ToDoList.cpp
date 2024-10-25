@@ -12,18 +12,6 @@ void TodoList::AddTask(const ToDo &TasktoAdd) {
     //std::cout << "ADD!" << std::endl;
 }
 
-void TodoList::ModifyTask(const std::string &title, const std::string &newDescript, int newprio) {
-    auto tasks = FindTask(title);
-    for ( auto it = tasks.begin();it != tasks.end(); it++){
-        (*it)->setPriority(newprio);
-        (*it)->setDescription(newDescript);
-        std::cout << "Task Modificato: " << (*it)->getTitle() << " - " << (*it)->getDescription() << " - " << (*it)->getPriority() << std::endl;
-    }
-}
-
-
-
-
 int TodoList::getNumberOfTasks() const {
     return Tasks.size();
 }
@@ -37,13 +25,6 @@ void TodoList::RemoveTask(const std::string &TasktoRemove) {
         return task->getTitle() == TasktoRemove || task->getDescription() == TasktoRemove;
     });
 
-}
-
-void TodoList::MarkAsCompleted(const std::string &title) {
-    auto tasks = FindTask(title);
-    for(auto it = tasks.begin();it != tasks.end();it++){
-        (*it)->MarkAsFinished();
-    }
 }
 
 
@@ -63,22 +44,59 @@ const std::string &TodoList::getTitleTodoList() const {
 int TodoList::getNumberOfCompletedTasks() const {
     return Number_of_CompletedTasks;
 }
-std::list<ToDo*> TodoList::FindTask(const std::string &TitleTasktoFind) {
-    std::list<ToDo*> result;
-    for (auto &task : Tasks) {
+
+std::list<ToDo *> TodoList::FindTask(const std::string &TitleTasktoFind) {
+    std::list<ToDo *> list;
+    for (auto &task: Tasks) {
         if (task->getTitle() == TitleTasktoFind || task->getDescription() == TitleTasktoFind) {
             std::cout << "Task trovato: " << task->getTitle() << " - " << task->getDescription() << std::endl;
-            result.push_back(task.get());
+            list.push_back(task.get());
         }
     }
-    int size = static_cast<int>(result.size());
+    int size = static_cast<int>(list.size());
     std::cout << "Number of Task Found: " << size << std::endl;
-    return result;
+    return list;
+}
+
+std::list<ToDo *>::iterator TodoList::MarkAsCompleted(const std::string &title, int TaskIndex) {
+    auto tasks = FindTask(title);
+    int size = static_cast<int>(tasks.size());
+    if (size == 0) {
+        std::cout << "Error: Empty list" << std::endl;
+        return tasks.end();
+    }
+
+    if (TaskIndex >= 0 && TaskIndex < size) {
+        auto it = std::next(tasks.begin(), TaskIndex);
+        (*it)->MarkAsFinished();
+        Number_of_CompletedTasks++;
+        std::cout << "Task Complete: " << (*it)->getTitle() << " _ " << (*it)->getDescription() << std::endl;
+        return it;
+    }
+    throw std::out_of_range("Error: Unvalid Index");
+}
+
+std::list<ToDo *>::iterator TodoList::ModifyTask(const std::string &title, const std::string &newDescript, int newprio, int TaskIndex) {
+
+    auto tasks = FindTask(title);
+    int size = static_cast<int>(tasks.size());
+    if (size == 0) {
+        std::cout << "Error: Empty list" << std::endl;
+        return tasks.end();
+    }
+    if (TaskIndex >= 0 && TaskIndex < size) {
+        auto it = std::next(tasks.begin(), TaskIndex);
+        (*it)->setPriority(newprio);
+        (*it)->setDescription(newDescript);
+        std::cout << "Task Modificato: " << (*it)->getTitle() << " - " << (*it)->getDescription() << " - "
+                  << (*it)->getPriority() << std::endl;
+        return it;
+    }
+    throw std::out_of_range("Error: Unvalid Index");
 }
 
 
-const std::list<std::unique_ptr<ToDo>> &TodoList::getTasks() const {
-    return Tasks;
-}
+
+
 
 

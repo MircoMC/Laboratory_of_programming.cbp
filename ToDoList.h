@@ -20,9 +20,9 @@ public:
 
     void RemoveTask(const std::string &TasktoRemove);
 
-    void ModifyTask(const std::string &title, const std::string &newDescript, int newprio);
+    std::list<ToDo*>::iterator ModifyTask(const std::string &title, const std::string &newDescript, int newprio,int TaskIndex);
 
-    void MarkAsCompleted(const std::string &title);
+    std::list<ToDo*>::iterator MarkAsCompleted(const std::string &title,int TaskIndex);
 
     void PrintAllTasks();
 
@@ -39,7 +39,6 @@ public:
     int getNumberOfCompletedTasks() const;
 
 
-    const std::list<std::unique_ptr<ToDo>> &getTasks() const;
 
 private:
     std::list<std::unique_ptr<ToDo>> Tasks;
