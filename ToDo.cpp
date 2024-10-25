@@ -34,8 +34,7 @@ bool ToDo::isFinished() const {
 }
 
 void ToDo::MarkAsFinished() {
-    Finished = true;
-    //Print_details();
+    this->Finished = true;
 }
 
 void ToDo::setDescription(const std::string &description)  {
