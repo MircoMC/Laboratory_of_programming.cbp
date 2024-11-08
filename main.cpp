@@ -14,13 +14,11 @@ int main() {
     // Crea alcune date
     Date date1(12, 2, 2024);
     Date date2(14, 10, 2024);
-
-    // Crea alcuni task e aggiungili alla lista
-    myTodoList.AddTask(ToDo("Task 1", "Descrizione del task 1", 1, date1));
+    ToDo td ("Task 2", "Descrizione del task 1", 1, date1);
+    myTodoList.AddTask(td);
     myTodoList.AddTask(ToDo("Task 2", "Descrizione del task 2", 2, date2));
-   myTodoList.MarkAsCompleted("Task 1");
-
-
+    myTodoList.MarkAsCompleted("Task 3",1);
+    myTodoList.PrintAllTasks();
 
 
 }

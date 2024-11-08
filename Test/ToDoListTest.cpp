@@ -31,10 +31,10 @@ TEST(ToDolistTest, FindTest) {
 
 TEST(ToDolistTest, RemoveTest) {
     TodoList mytodolist;
-    ToDo td("task 1", "des", 1, Date(2, 2, 2023));
-    ToDo td1("task 2", "descrizione", 4, Date(2, 2, 2023));
+    ToDo td1("task 1", "Continuare il programma di ASD", 1, Date(2, 2, 2023));
+    ToDo td2("task 2", "descrizione", 4, Date(2, 2, 2023));
     mytodolist.AddTask(td1);
-    mytodolist.AddTask(td);
+    mytodolist.AddTask(td2);
     mytodolist.RemoveTask("task 2");
     EXPECT_EQ(mytodolist.getNumberOfTasks(), 1);
 }
